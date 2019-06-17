@@ -1,0 +1,204 @@
+NAMEREG s1, numbr1;
+NAMEREG s2, numbr2;
+NAMEREG s3, mantissa1;
+NAMEREG s4, mantissa2;
+NAMEREG s5, exponent1;
+NAMEREG s6, exponent2;
+NAMEREG s8, temp;
+NAMEREG s7, return;
+NAMEREG sF, output;
+
+LOAD numbr1, F7;
+LOAD numbr2, F1;
+LOAD output, 00;
+
+main:
+	CALL infinitycheck;
+	TEST return, 01;
+	JUMP NZ, end;
+
+	CALL nullcheck;
+	TEST return, 01;
+	JUMP NZ, end;
+
+	CALL aufteilen;
+	
+	CALL verschieben;
+
+	CALL rechnen;
+
+	CALL normalize;
+
+
+
+end:
+	JUMP end;
+
+
+aufteilen:
+	LOAD mantissa1, numbr1;
+	AND mantissa1, 07;		mantissa1 enthält nun mantisse der nummer 1
+	SL0 mantissa1;
+	SL0 mantissa1;
+	SL0 mantissa1;
+	SL0 mantissa1;
+	SL0 mantissa1;
+	SR1 mantissa1;
+	SR0 mantissa1;			mantissa1 hat nun die struktur 01...000
+
+	LOAD mantissa2, numbr2;
+	AND mantissa2, 07;		mantissa2 enthält nun mantisse der nummer 2
+	SL0 mantissa2;
+	SL0 mantissa2;
+	SL0 mantissa2;
+	SL0 mantissa2;
+	SL0 mantissa2;
+	SR1 mantissa2;
+	SR0 mantissa2;			mantissa2 hat nun die struktur 01...000
+
+	LOAD exponent1, numbr1;		setze exponent 1
+	AND exponent1, 78;
+	SR0 exponent1;
+	SR0 exponent1;
+	SR0 exponent1;			exponent 1 hat die struktur 0000....
+	ADD exponent1, 02;		exponent + 2 da mantisse um 2 nach rechts verschoben wurde
+
+	LOAD exponent2, numbr2;		setze exponent 2
+	AND exponent2, 78;
+	SR0 exponent2;
+	SR0 exponent2;
+	SR0 exponent2;			exponent 2 hat die struktur 0000....
+	ADD exponent2, 02;		exponent + 2 da mantisse um 2 nach rechts verschoben wurde
+
+	RETURN;
+
+infinitycheck:
+	LOAD temp, numbr1;
+	XOR temp, 78;
+	TEST temp, 78;
+	JUMP Z, _numbr1_infinity;
+	LOAD temp, numbr2;
+	XOR temp, 78;
+	TEST temp, 78;
+	JUMP Z, _numbr2_infinity;
+	LOAD return, 0;
+	RETURN;
+
+_numbr1_infinity:
+	LOAD output, numbr1;
+	LOAD return, 1;
+	RETURN;
+_numbr2_infinity:
+	LOAD output, numbr2;
+	LOAD return, 1;
+	RETURN;
+
+nullcheck:
+	TEST numbr1, FF;
+	JUMP Z, _numbr1_zero;
+	TEST numbr2, FF;
+	JUMP Z, _numbr2_zero;
+	LOAD return, 0;
+	RETURN;
+
+_numbr1_zero:
+	LOAD output, numbr2;
+	LOAD return, 1;
+	RETURN;
+
+_numbr2_zero:
+	LOAD output, numbr1;
+	LOAD return, 1;
+	RETURN;
+
+
+
+verschieben:
+	COMPARE exponent1, exponent2; 1 > 2 => C = 0 sonst C = 1
+	RETURN Z; Wird gesetzt wenn exp1 == exp2
+	JUMP NC, _e1_larger;
+	JUMP C, _e2_larger;
+
+_e1_larger:
+	ADD exponent2, 01;
+	SR0 mantissa2;
+	JUMP verschieben;
+_e2_larger:
+	ADD exponent1, 01;
+	SR0 mantissa1;
+	JUMP verschieben;
+
+rechnen:
+	CALL checkSign;
+	JUMP Z, _addition;
+	JUMP NZ, _subtraction;
+
+_rechnen_finish:
+	LOAD return, temp;
+	RETURN;
+	
+
+checkSign:
+	LOAD temp, numbr1;
+	XOR temp, numbr2;
+	TEST temp, 80
+	RETURN;
+
+_addition:
+	LOAD temp, mantissa1;
+	ADD temp, mantissa2;
+	LOAD output, numbr1;
+	AND output, 80;
+	JUMP _rechnen_finish;
+	
+
+_subtraction:
+	LOAD temp, mantissa1;
+	SUB temp, mantissa2;
+	JUMP C, _underflow;
+_subtraction_finish:
+	JUMP _rechnen_finish;
+	
+
+_underflow:
+	LOAD output, numbr1;
+	AND output, 80;
+	XOR output, 80;
+	XOR temp, FF;
+	ADD temp, 01;
+	JUMP _subtraction_finish;
+
+normalize:
+	CALL moveBack;
+	SR0 return;
+	SR0 return;
+	SR0 return;
+	SR0 return;
+	SR0 return;
+	OR output, return;
+	SL0 exponent1;
+	SL0 exponent1;
+	SL0 exponent1;
+	OR output, exponent1;
+	RETURN;
+
+
+moveBack:
+	SUB exponent1, 01;
+	SL0 return;
+	JUMP Z, _set_everything_zero;
+	JUMP NC, moveBack;
+_move_back_end:
+	RETURN;
+
+_set_everything_zero:
+	LOAD return, 00;
+	LOAD exponent1, 00;
+	JUMP _move_back_end;
+
+
+	
+	
+	
+
+	
