@@ -1,0 +1,324 @@
+NAMEREG s0, input;
+NAMEREG s2, method_1;
+NAMEREG s3, method_2;
+NAMEREG s5, return;
+NAMEREG sF, output;
+NAMEREG s6, var_o;
+NAMEREG s7, var_n;
+NAMEREG s8, var_z;
+NAMEREG s9, var_x;
+NAMEREG sA, var_y;
+NAMEREG sB, temp_1;
+NAMEREG sC, temp_2;
+NAMEREG sD, temp_3;
+NAMEREG sE, temp_4;
+
+NAMEREG s1, main_temp;
+
+CONSTANT alpha_0, 40;
+CONSTANT alpha_1, 24;
+CONSTANT alpha_2, 14;
+CONSTANT alpha_3, 0A;
+CONSTANT alpha_4, 05;
+CONSTANT alpha_5, 03;
+CONSTANT alpha_6, 01;
+CONSTANT alpha_7, 00;
+
+
+LOAD output, 00;
+LOAD input, 0;
+
+main:
+	LOAD var_z, input;
+	LOAD var_n, 00;
+	LOAD var_x, 4D;				Start value set as K 
+	LOAD var_y, 00;
+	LOAD var_o, 00;
+
+
+	LOAD method_1, var_z;
+	CALL calculate_o;
+	LOAD var_o, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_x;
+	LOAD main_temp, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_y;
+	LOAD var_y, return;
+	LOAD var_x, main_temp;
+	LOAD method_1, var_o;
+	LOAD method_2, alpha_0;
+	CALL calculate_next_z;
+	LOAD var_z, return;
+	ADD var_n, 01;
+
+	LOAD method_1, var_z;
+	CALL calculate_o;
+	LOAD var_o, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_x;
+	LOAD main_temp, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_y;
+	LOAD var_y, return;
+	LOAD var_x, main_temp;
+	LOAD method_1, var_o;
+	LOAD method_2, alpha_1;
+	CALL calculate_next_z;
+	LOAD var_z, return;
+	ADD var_n, 01;
+
+	LOAD method_1, var_z;
+	CALL calculate_o;
+	LOAD var_o, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_x;
+	LOAD main_temp, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_y;
+	LOAD var_y, return;
+	LOAD var_x, main_temp;
+	LOAD method_1, var_o;
+	LOAD method_2, alpha_2;
+	CALL calculate_next_z;
+	LOAD var_z, return;
+	ADD var_n, 01;
+
+	LOAD method_1, var_z;
+	CALL calculate_o;
+	LOAD var_o, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_x;
+	LOAD main_temp, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_y;
+	LOAD var_y, return;
+	LOAD var_x, main_temp;
+	LOAD method_1, var_o;
+	LOAD method_2, alpha_3;
+	CALL calculate_next_z;
+	LOAD var_z, return;
+	ADD var_n, 01;
+
+	LOAD method_1, var_z;
+	CALL calculate_o;
+	LOAD var_o, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_x;
+	LOAD main_temp, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_y;
+	LOAD var_y, return;
+	LOAD var_x, main_temp;
+	LOAD method_1, var_o;
+	LOAD method_2, alpha_4;
+	CALL calculate_next_z;
+	LOAD var_z, return;
+	ADD var_n, 01;
+
+	LOAD method_1, var_z;
+	CALL calculate_o;
+	LOAD var_o, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_x;
+	LOAD main_temp, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_y;
+	LOAD var_y, return;
+	LOAD var_x, main_temp;
+	LOAD method_1, var_o;
+	LOAD method_2, alpha_5;
+	CALL calculate_next_z;
+	LOAD var_z, return;
+	ADD var_n, 01;
+
+	LOAD method_1, var_z;
+	CALL calculate_o;
+	LOAD var_o, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_x;
+	LOAD main_temp, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_y;
+	LOAD var_y, return;
+	LOAD var_x, main_temp;
+	LOAD method_1, var_o;
+	LOAD method_2, alpha_6;
+	CALL calculate_next_z;
+	LOAD var_z, return;
+	ADD var_n, 01;
+
+	LOAD method_1, var_z;
+	CALL calculate_o;
+	LOAD var_o, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_x;
+	LOAD main_temp, return;
+	LOAD method_1, var_o;
+	LOAD method_2, var_n;
+	CALL calculate_next_y;
+	LOAD var_y, return;
+	LOAD var_x, main_temp;
+	LOAD method_1, var_o;
+	LOAD method_2, alpha_7;
+	CALL calculate_next_z;
+	LOAD var_z, return;
+	ADD var_n, 01;
+
+	
+	
+
+_end:
+	JUMP _end;
+
+
+calculate_o:		;			(method_1 as Zn)
+	COMPARE method_1, 7F; 			COMPARE Zn to 127
+	JUMP NC, _calculate_o_zn_negative;	method_1 was greater than 127 so its negative
+	JUMP C, _calculate_o_zn_positive;	method_1 was smaller than 127 so its positive
+	_calculate_o_zn_negative:
+		LOAD return, FF;
+		RETURN;
+	_calculate_o_zn_positive:
+		LOAD return, 01;
+		RETURN;
+
+
+calculate_next_z:;				(method_1 as o, method_2 as al
+	LOAD temp_1, method_2;
+	LOAD method_2, method_1;
+	LOAD method_1, temp_1;
+	CALL multiply_values;
+	LOAD temp_1, return;
+	LOAD return, var_z;
+	SUB return, temp_1;
+	RETURN;
+	
+	
+
+
+calculate_next_x:;				(method_1 as o, method_2 as n) uses tmp 1-4
+	LOAD temp_3, method_1;
+	LOAD temp_4, method_2;
+	LOAD method_1, var_y;
+	LOAD method_2, temp_3;
+	CALL multiply_values;
+	LOAD temp_3, return;
+	LOAD method_1, temp_3;
+	LOAD method_2, temp_4;
+	CALL divide_by_two;
+	LOAD temp_3, return;
+	LOAD return, var_x;
+	SUB return, temp_3;
+	RETURN;
+
+calculate_next_y:;				(method_1 as o, method_2 as n)
+	LOAD temp_3, method_1;
+	LOAD temp_4, method_2;
+	LOAD method_1, var_x;
+	LOAD method_2, temp_3;
+	CALL multiply_values;
+	LOAD temp_3, return;
+	LOAD method_1, temp_3;
+	LOAD method_2, temp_4;
+	CALL divide_by_two;
+	LOAD temp_3, return;
+	ADD temp_3, var_y;
+	LOAD return, temp_3;
+	RETURN;
+
+	
+
+
+
+
+
+
+divide_by_two:;					(method_1 as number, method_2 as 2^method_2)
+	TEST method_2, FF;
+	JUMP Z, _divide_by_two_end;
+_divide_by_two_loop:
+	SRX method_1;
+	SUB method_2, 01;
+	JUMP NZ, _divide_by_two_loop;
+_divide_by_two_end:
+	LOAD return, method_1;
+	RETURN;
+	
+
+
+
+
+
+multiply_values:;				(method_1, method_2 as -1 or 1) uses temp_1, temp_2
+	TEST method_2, 80;
+	JUMP Z, _multiply_values_one;
+	XOR method_1, FF;
+	ADD method_1, 01; 
+_multiply_values_one:
+	LOAD return, method_1;
+	RETURN;
+
+
+
+	JUMP _check_values_negative;
+_multiply_values_negative_check_done:;
+	LOAD temp_1, 01;	
+	LOAD return, 00;
+_multiply_values_add_loop:;		
+	TEST method_1, temp_1;			
+	JUMP NZ, _value_add;
+_multiply_values_value_add_done:;
+	SL0 method_2;
+	SL0 temp_1;
+	JUMP NZ, _multiply_values_add_loop;
+	TEST temp_2, FF;
+	JUMP Z, _multiply_values_result_not_negative;
+	XOR return, FF;
+	ADD return, 01;
+_multiply_values_result_not_negative:
+	RETURN;
+	
+	
+
+	_check_values_negative:
+		LOAD temp_2, 00;			Set result_negative_flag to 0;
+		TEST method_1, 80;			Check first bit of input 1 to check if its negative
+		JUMP NZ, _first_negative;
+	_check_values_negative_second:
+		TEST method_2, 80;			Check first bit of input 2 to check whether ist negative
+		JUMP NZ, _second_negative;
+	_check_values_negative_third:
+		JUMP _multiply_values_negative_check_done;
+
+		_first_negative:
+			XOR temp_2, FF;				Swap result_negative_flag
+			XOR method_1, FF;			Normalize input 1 to a positive number
+			ADD method_1, 01;
+			JUMP _check_values_negative_second;
+		
+		_second_negative:
+			XOR temp_2, FF;				Swap result_negative_flag
+			XOR method_2, FF;			Normalize input 2 to a positive number
+			ADD method_2, 01;
+			JUMP _check_values_negative_third;
+	
+	_value_add:
+		ADD return, method_2;
+		JUMP _multiply_values_value_add_done;
+		
